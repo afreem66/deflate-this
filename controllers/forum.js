@@ -46,22 +46,54 @@ router.post('/post/new', function(req, res) {
     if (err) {
       console.log("There was an error " + err) ;
     } else {
-      res.redirect(302, 'post/feed');
+      res.redirect(302, '/forum/post/feed');
     }
   })
 })
 
-  ///writing feed view pathway
-  router.get('/post/feed', function (req, res) {
-    Post.find({}, function(err, allPosts) {
-      if (err) {
-        console.log("There was an error finding the posts" + err);
-      } else {
-        res.render('post/feed', {
-          posts : allPosts
-        });
-      }
-    });
-  })
+/// feed view pathway
+router.get('/post/feed', function (req, res) {
+  Post.find({}, function(err, allPosts) {
+    if (err) {
+      console.log("There was an error finding the posts" + err);
+    } else {
+      res.render('post/feed', {
+        posts : allPosts
+      });
+    }
+  });
+})
+
+///individual post view pathway
+router.get('/post/:id/view', function(req, res) {
+  var postId = req.params.id;
+
+  Post.findOne({
+    _id : postId
+  }, function(err, foundPost) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('post/view', {
+        thisPost : foundPost
+      });
+    }
+  });
+});
+
+///individual post view pathway
+router.delete('/post/:id/view', function(req, res) {
+  var postId = req.params.id;
+
+  Post.remove({
+    _id : postId
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(302, '/forum/post/feed');
+    }
+  });
+});
 
   module.exports = router;
