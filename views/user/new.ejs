@@ -1,4 +1,4 @@
-<form class="new-user" action="/user" method="POST">
+<form class="new-user" action="/forum/user/new" method="POST">
 
   <div class="form-group">
 
@@ -9,33 +9,28 @@
            name="user[username]" id="username"
            placeholder="What do you want to log in with?" >
    <br/>
-   <label for="username">Password</label>
+   <label for="password">Password</label>
    <br/>
    <input class="form-control"
           type="text"
           name="user[password]" id="password"
           placeholder="Choose a password" >
     <br/>
-    <label for="firstName">First Name</label>
+    <label for="name">Name</label>
     <br/>
     <input class="form-control"
          type="text"
-         name="user[name][firstname]" id="firstName"
-         placeholder="What is your first name" >
+         name="user[name]" id="name"
+         placeholder="What is your full name?" >
     <br/>
-    <label for="lastName">Last Name</label>
+    <label>Gender</label>
     <br/>
-    <input class="form-control"
-        type="text"
-        name="user[name][lastname]" id="lastName"
-        placeholder="What is your last name" >
-    <br/>
-    <label for="female">Gender</label>
-    <br/>
+    <label for="female">Female</label>
     <input class="form-control"
        type="radio"
        name="user[gender]" id="female"
        value="female">
+   <label for="male">Male</label>
    <input class="form-control"
       type="radio"
       name="user[gender]" id="male"

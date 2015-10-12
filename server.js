@@ -1,8 +1,8 @@
 var express = require('express'),
     PORT = process.env.PORT || 5432,
     server = express(),
-    MONGOURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
-    dbname = "some_useful_name",
+    // MONGOURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
+    // dbname = "forum",
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     ejs = require('ejs'),
@@ -37,11 +37,9 @@ server.use('/', function(req, res) {
   res.render('welcome');
 });
 
-
-
 ///connecting mongoose
-  mongoose.connect(MONGOURI + "/" + dbname);
-
+// mongoose.connect(MONGOURI + "/" + dbname);
+mongoose.connect("mongodb://localhost:27017/forum")
 ///setting server to listen
   server.listen(PORT, function () {
     console.log("server is up on PORT: ", PORT);
