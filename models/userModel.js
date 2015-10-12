@@ -10,6 +10,6 @@ var userSchema = new Schema ({
 
 }, {collection: 'user', strict: false});
 
-var User = mongoose.model(null, userSchema)
+var User = mongoose.model('User', userSchema)
 
 module.exports = User;
