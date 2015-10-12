@@ -4,10 +4,15 @@
   padding: 0;
 }
 
-body {
+main {
   background: red;
 }
 
 h1 {
-  color: red;
+  text-align: center;
+  background: red;
+}
+
+li {
+  display: inline-block;
 }

@@ -16,17 +16,17 @@ var express = require('express'),
     server.set('view engine', 'ejs');
 
 ///setting up packages
-    server.use(express.static('./public'));
+server.use(express.static('./public'));
 
-    server.use(methodOverride('_method'));
+server.use(methodOverride('_method'));
 
-    server.use(bodyParser.urlencoded({
-      extended: true
-    }));
+server.use(bodyParser.urlencoded({
+  extended: true
+}));
 
-    server.use(morgan('dev'));
+server.use(morgan('dev'));
 
-    server.use(expressLayouts);
+server.use(expressLayouts);
 ///server pathways
 
 //pathway to homepage
@@ -35,7 +35,7 @@ server.get('/welcome', function(req, res) {
 });
 
 //pathway to login page
-server.get('/user/login', function(req, res) {
+server.get('./user/login', function(req, res) {
   res.render('/user/login');
 });
 
