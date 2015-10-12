@@ -1,0 +1,30 @@
+<form class="new-post" action="/postform" method="post">
+
+  <div class="form-group">
+
+    <label for="subject">Subject</label>
+    <br/>
+    <input class="form-control"
+           type="text"
+           name="post[subject]" id="subject"
+           placeholder="What is this post about" >
+           <br/>
+   <label for="author">Author</label>
+   <br/>
+   <input class="form-control"
+          type="text"
+          name="post[author]" id="author"
+          placeholder="Who wrote this?"
+          value="<%= user.name %>" >
+          <br/>
+    <label for="content">Content</label>
+    <br/>
+    <input class="form-control"
+         type="text"
+         name="post[content]" id="content"
+         placeholder="What do you want to say?" >
+         <br/>
+  
+     <input type="submit">
+   </div>
+</form>
