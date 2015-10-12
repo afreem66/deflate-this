@@ -12,8 +12,8 @@ var express = require('express'),
     sessions = require('sessions');
 
 ///defining path for
-    server.set('views', './views');
-    server.set('view engine', 'ejs');
+  server.set('views', './views');
+  server.set('view engine', 'ejs');
 
 ///setting up packages
 server.use(express.static('./public'));
@@ -27,27 +27,17 @@ server.use(bodyParser.urlencoded({
 server.use(morgan('dev'));
 
 server.use(expressLayouts);
+
 ///server pathways
+var forumController = require('./controllers/forum.js');
+server.use('/forum', forumController);
 
 //pathway to homepage
-server.get('/welcome', function(req, res) {
+server.use('/', function(req, res) {
   res.render('welcome');
 });
 
-//pathway to login page
-server.get('./user/login', function(req, res) {
-  res.render('/user/login');
-});
 
-//pathway to create user page
-server.get('/user/new', function(req, res) {
-  res.render('/user/new');
-});
-
-//pathway to edit user page
-server.get('/user/:id/edit', function(req, res) {
-  res.render('/user/:id/edit');
-});
 
 ///connecting mongoose
   mongoose.connect(MONGOURI + "/" + dbname);

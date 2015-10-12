@@ -8,34 +8,39 @@
            type="text"
            name="user[username]" id="username"
            placeholder="What do you want to log in with?" >
-           <br/>
-   <label for="username">User Name</label>
+   <br/>
+   <label for="username">Password</label>
    <br/>
    <input class="form-control"
           type="text"
           name="user[password]" id="password"
           placeholder="Choose a password" >
-          <br/>
-    <label for="firstName">User Name</label>
+    <br/>
+    <label for="firstName">First Name</label>
     <br/>
     <input class="form-control"
          type="text"
          name="user[name][firstname]" id="firstName"
          placeholder="What is your first name" >
-         <br/>
-    <label for="firstName">User Name</label>
-           <br/>
+    <br/>
+    <label for="lastName">Last Name</label>
+    <br/>
     <input class="form-control"
         type="text"
         name="user[name][lastname]" id="lastName"
-        placeholder="What is your first name" >
-        <br/>Last Name</form>>
-    <label for="gender">Gender</label>
+        placeholder="What is your last name" >
+    <br/>
+    <label for="female">Gender</label>
     <br/>
     <input class="form-control"
        type="radio"
-       name="user[gender]" id="gender" >
-       <br/>
-     <input type="submit">
+       name="user[gender]" id="female"
+       value="female">
+   <input class="form-control"
+      type="radio"
+      name="user[gender]" id="male"
+      value="male" >
+    <br/>
+    <input type="submit">
    </div>
 </form>
