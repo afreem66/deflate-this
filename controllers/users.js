@@ -51,12 +51,12 @@ var express = require('express'),
   });
 
 ///pathway to view user info
-router.get('/:id/view', function (req, res) {
-  var userName = req.session.currentUser.username
-  console.log(userName);
+router.get('/view', function (req, res) {
+  var name = req.session.currentUser.username
+  console.log(name);
 
   User.findOne({
-    username : userName
+    username : name
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
@@ -72,10 +72,10 @@ router.get('/:id/view', function (req, res) {
 
 ///pathway to edit user page
 router.get('/user/:id/edit', function (req, res) {
-  var userID = req.params.id;
+  var userId = req.params.id;
 
   User.findOne({
-    _id : userID
+    _id : userId
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
@@ -108,16 +108,17 @@ router.patch('user/:id/edit ', function (req, res) {
   });
 });
 
-router.delete('/:id/view', function (req, res) {
-  var userId = req.params.id;
+router.delete('/view', function (req, res) {
+  // var userId = req.params.id;
+    var name = req.session.currentUser.username;
 
-  Post.remove({
-    _id : userId
+  User.remove({
+    username : name
   }, function (err) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect(302, '/users/new');
+      res.redirect(302, '/loginWall');
     }
   });
 });

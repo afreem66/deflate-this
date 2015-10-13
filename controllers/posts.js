@@ -76,23 +76,6 @@ router.get('/:id/authorView', function (req, res) {
   });
 });
 
-///individual post view for non-author pathway
-router.get('/:id/view', function (req, res) {
-  var postId = req.params.id;
-
-  Post.findOne({
-    _id : postId
-  }, function (err, foundPost) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render('post/view', {
-        thisPost : foundPost
-      });
-    }
-  });
-});
-
 router.get('/post/:id/edit', function (req, res) {
   var postID = req.params.id;
 
