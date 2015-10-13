@@ -11,7 +11,7 @@ var express = require('express'),
     res.render('user/new');
   });
 
-  ///creating a user pathway
+  ///creating a user pathway SHOULD BE FOR AUTHOR ONLY AND TAKE TO AUTHOR ONLY VIEW
 
   router.post('/user/new', function(req, res) {
     var newUser = new User(req.body.user)
@@ -64,8 +64,8 @@ router.get('/post/feed', function (req, res) {
   });
 })
 
-///individual post view pathway
-router.get('/post/:id/view', function(req, res) {
+///individual post view for author pathway WILL HAVE EDIT AND DELETE
+router.get('/post/:id/authorView', function(req, res) {
   var postId = req.params.id;
 
   Post.findOne({
@@ -74,15 +74,34 @@ router.get('/post/:id/view', function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render('post/view', {
+      res.render('post/authorView', {
         thisPost : foundPost
       });
     }
   });
 });
 
-///individual post view pathway
-router.delete('/post/:id/view', function(req, res) {
+///individual post view for non-author pathway
+// router.get('/post/:id/view', function(req, res) {
+//   var postId = req.params.id;
+//
+//   Post.findOne({
+//     _id : postId
+//   }, function(err, foundPost) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.render('post/view', {
+//         thisPost : foundPost
+//       });
+//     }
+//   });
+// });
+
+// router.patch('post/id')
+
+///individual post delete pathway FOR AUTHOR ONLY
+router.delete('/post/:id/authorView', function(req, res) {
   var postId = req.params.id;
 
   Post.remove({
