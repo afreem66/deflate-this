@@ -10,6 +10,13 @@ var express = require('express'),
     }));
 
   //pathway to create user page
+  router.get('/logout', function (req, res) {
+    req.session.currentUser = null;
+
+    console.log(req.session.currentUser);
+
+    res.redirect(302, '/loginWall')
+  });
 
   router.get('/new', function (req, res) {
     res.render('user/new');
@@ -32,6 +39,7 @@ var express = require('express'),
       }
     });
   });
+
 
   ///creating a user pathway SHOULD BE FOR AUTHOR ONLY AND TAKE TO AUTHOR ONLY VIEW
 
