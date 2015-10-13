@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema ({
   username: {type : String},
   password: {type: String},
-  name: {type: String}
+  name: {type: String},
+  team: {type: String}
 
 }, {collection: 'user', strict: false});
 

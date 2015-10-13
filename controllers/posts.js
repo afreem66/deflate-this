@@ -26,6 +26,7 @@ router.get('/new', function (req, res) {
 router.post('/new', function (req, res) {
   var newPost = new Post({
     author : req.session.currentUser.username,
+    viewpoint : req.session.currentUser.viewpoint,
     title: req.body.post.title,
     content: req.body.post.content
   })
@@ -58,7 +59,7 @@ router.get('/feed', function (req, res) {
 })
 
 ///individual post view for author pathway WILL HAVE EDIT AND DELETE
-router.get('/:id/authorView', function (req, res) {
+router.get('/:id/view', function (req, res) {
   var postId = req.params.id;
 
   Post.findOne({

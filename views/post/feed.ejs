@@ -1,7 +1,11 @@
 <% posts.forEach(function (post) { %>
-  <a href="/posts/<%= post._id %>/authorView"> <h3> <%= post.title %></h3> </a>
+  <a href="/posts/<%= post._id %>/view"> <h3> <%= post.title %></h3> </a>
   <h4> <%= post.author %> </h4>
+  <h5> <%= post.viewpoint %> </h5>
   <p>
     <%= post.content %>
+  </p>
+  <p>
+    <%= post.date %>
   </p>
 <% }) %>

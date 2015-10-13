@@ -3,8 +3,10 @@ var mongoose = require('mongoose'),
 
 var postSchema = new Schema ({
   title: {type: String},
-  author: {type: String}, ///need to address this when it come to login
-  content: {type: String}
+  author: {type: String},
+  viewpoint: {type: String},
+  content: {type: String},
+  date: {type: Date, default: Date.now}
 }, {collection: 'post', strict : false});
 
 var Post = mongoose.model('Post', postSchema)
