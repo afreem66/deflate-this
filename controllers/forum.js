@@ -25,11 +25,11 @@ var express = require('express'),
     console.log(req.session);
     console.log(newUser);
 
-    newUser.save(function (err) {
+    newUser.save(function (err, user) {
       if (err) {
         console.log("There was an error, " + err);
       } else {
-        res.redirect(302, '/forum/user/:id/view');
+        res.redirect(302, '/forum/user/' + user._id + '/view');
       }
     });
   });
