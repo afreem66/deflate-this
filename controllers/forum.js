@@ -1,9 +1,15 @@
 var express = require('express'),
-    router = express.Router();
+    router = express.Router(),
+    session = require('express-session');
     User = require('../models/userModel.js');
     Post = require('../models/postModel.js');
 
 
+    router.use(session({
+      secret: "SOME PASSPHRASE TO ENCRYPT",
+      resave : true,
+      saveUninitialized: true
+    }));
 
   //pathway to create user page
 
@@ -15,33 +21,38 @@ var express = require('express'),
 
   router.post('/user/new', function(req, res) {
     var newUser = new User(req.body.user)
+    req.session.username = req.body.user.username
+    console.log(req.session);
     console.log(newUser);
 
     newUser.save(function (err) {
       if (err) {
         console.log("There was an error, " + err);
       } else {
-        res.redirect(302, '/user/view');
+        res.redirect(302, '/forum/user/:id/view');
       }
     });
-
   });
-///pathway to view user info
-router.get('user/:id/view', function (req, res) {
-  var userID = req.params.id;
 
-  User.findone({
+///pathway to view user info
+router.get('/user/:id/view', function (req, res) {
+  var userID = req.params.id;
+  console.log(userID);
+
+  User.findOne({
     _id : userID
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
     } else {
-      res.render('/user/view', {
+      res.render('user/view', {
         thisUser : foundUser
       });
     }
   });
 });
+
+
 ///pathway to edit user page
 router.get('/user/:id/edit', function (req, res) {
   res.render('/user/:id/edit');

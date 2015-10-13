@@ -9,11 +9,17 @@ var express = require('express'),
     expressLayouts = require('express-ejs-layouts'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
-    sessions = require('sessions');
+    session = require('express-session');
 
 ///defining path for
   server.set('views', './views');
   server.set('view engine', 'ejs');
+
+  server.use(session({
+    secret: "SOME PASSPHRASE TO ENCRYPT",
+    resave : true,
+    saveUninitialized: true
+  }));
 
 ///setting up packages
 server.use(express.static('./public'));
@@ -36,6 +42,11 @@ server.use('/forum', forumController);
 server.use('/', function(req, res) {
   res.render('welcome');
 });
+
+server.use( function (req, res, next) {
+  console.log(req.body);
+  console.log(req.session);
+})
 
 //connecting mongoose
 mongoose.connect(MONGOURI + "/" + dbname);
