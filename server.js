@@ -42,5 +42,5 @@ mongoose.connect(MONGOURI + "/" + dbname);
 
 ///setting server to listen
   server.listen(PORT, function () {
-    console.log("server is up on PORT: ", PORT);
+    console.log("I LOVE WALTAH");
   })

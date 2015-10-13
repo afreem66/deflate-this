@@ -1,0 +1,16 @@
+
+<h3> <%= thisUser.username %> </h3>
+<h4> <%= thisUser.password %> </h4>
+<h3> <%= thisUser.name %> </h3>
+
+
+<!-- This should only be available when it is a user's own post -->
+<a href="/forum/post/<%= thisUser._id %>/edit">[Edit]</a>
+
+<div class="form-group">
+  <form class="delete" action="?_method=DELETE" method="POST">
+    <input class="form-control"
+           type="submit"
+           value="Delete">
+  </form>
+</div>

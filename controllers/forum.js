@@ -26,19 +26,34 @@ var express = require('express'),
     });
 
   });
+///pathway to view user info
+router.get('user/:id/view', function (req, res) {
+  var userID = req.params.id;
 
-  //pathway to edit user page
-  router.get('/user/:id/edit', function(req, res) {
-    res.render('/user/:id/edit');
+  User.findone({
+    _id : userID
+  }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('/user/view', {
+        thisUser : foundUser
+      });
+    }
   });
+});
+///pathway to edit user page
+router.get('/user/:id/edit', function (req, res) {
+  res.render('/user/:id/edit');
+});
 
 ///pathway to write a post form
 
-router.get('/post/new', function(req, res) {
+router.get('/post/new', function (req, res) {
   res.render('post/new');
 });
 
-router.post('/post/new', function(req, res) {
+router.post('/post/new', function (req, res) {
   var newPost = new Post(req.body.post)
   console.log(newPost);
 
@@ -82,27 +97,68 @@ router.get('/post/:id/authorView', function(req, res) {
 });
 
 ///individual post view for non-author pathway
-// router.get('/post/:id/view', function(req, res) {
-//   var postId = req.params.id;
-//
-//   Post.findOne({
-//     _id : postId
-//   }, function(err, foundPost) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.render('post/view', {
-//         thisPost : foundPost
-//       });
-//     }
-//   });
-// });
+router.get('/post/:id/view', function (req, res) {
+  var postId = req.params.id;
 
-// router.patch('post/id')
+  Post.findOne({
+    _id : postId
+  }, function (err, foundPost) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('post/view', {
+        thisPost : foundPost
+      });
+    }
+  });
+});
+
+router.get('/post/:id/edit', function (req, res) {
+  var postID = req.params.id;
+
+  Post.findOne({
+    _id : postID
+  }, function (err, foundPost) {
+    if (err) {
+      console.log(err, foundPost);
+    } else {
+      res.render('post/edit', {
+        post : foundPost
+      });
+    }
+  });
+
+});
+
+router.patch('post/:id/edit ', function (req, res) {
+  var postID = req.params.id,
+      postAtrribs = req.params.post;
+
+  Post.findOne({
+    _id : postID
+  }, function(err, foundPost) {
+    if (err) {
+      console.log(err);
+    } else {
+      foundPost.update(postAtrribs, function (errDos, post) {
+        if (errDos) {
+          console.log(errDos);
+        } else {
+          res.redirect(302, '/forum/post/feed');
+        }
+      });
+    }
+  });
+});
+
 
 ///individual post delete pathway FOR AUTHOR ONLY
+///first grabs the id from the params then finds the post in the db by id
+///it then redirects to the updated feed
+
 router.delete('/post/:id/authorView', function(req, res) {
   var postId = req.params.id;
+
 
   Post.remove({
     _id : postId

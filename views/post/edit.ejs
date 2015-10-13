@@ -1,0 +1,31 @@
+<form class="new-post" action="/forum/post/<%= post._id %>/edit?_method=PATCH" method="POST">
+  <div class="form-group">
+
+    <label for="title">Title</label>
+    <br/>
+    <input class="form-control"
+           type="text"
+           name="post[title]" id="title"
+           value= "<%= post.title %>"
+           placeholder="What is this post about">
+           <br/>
+   <label for="author">Author</label>
+   <br/>
+   <input class="form-control"
+          type="text"
+          name="post[author]" id="author"
+          value= "<%= post.author %>"
+          placeholder="Who wrote this?">
+          <br/>
+    <label for="content">Content</label>
+    <br/>
+    <input class="form-control"
+         type="text"
+         name="post[content]" id="content"
+         value= "<%= post.content %>"
+         placeholder="What do you want to say?">
+         <br/>
+
+     <input type="submit">
+   </div>
+</form>
