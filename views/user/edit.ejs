@@ -1,0 +1,31 @@
+<form class="edit-user" action="/users/user/<%= user._id %>/edit?_method=PATCH" method="POST">
+
+  <div class="form-group">
+
+    <label for="username">User Name</label>
+    <br/>
+    <input class="form-control"
+           type="text"
+           name="user[username]" id="username"
+           placeholder="What do you want to log in with?"
+           value="<%= user.username %>" >
+   <br/>
+   <label for="password">Password</label>
+   <br/>
+   <input class="form-control"
+          type="password"
+          name="user[password]" id="password"
+          placeholder="Choose a password"
+          value="<%= user.password %>" >
+    <br/>
+    <label for="name">Name</label>
+    <br/>
+    <input class="form-control"
+         type="text"
+         name="user[name]" id="name"
+         placeholder="What is your full name?"
+         value="<%= user.name %>" >
+    <br/>
+    <input type="submit" value="Update User">
+   </div>
+</form>

@@ -13,9 +13,14 @@ var express = require('express'),
 ///pathway to write a post form
 
 router.get('/new', function (req, res) {
-  res.render('post/new', {
-    user : req.session.currentUser
-  });
+  if (req.session.currentUser) {
+    res.render('post/new', {
+      user : req.session.currentUser
+    });
+  } else {
+    res.redirect(302, "/");
+  }
+
 });
 
 router.post('/new', function (req, res) {
@@ -33,15 +38,19 @@ router.post('/new', function (req, res) {
 
 /// feed view pathway
 router.get('/feed', function (req, res) {
-  Post.find({}, function (err, allPosts) {
-    if (err) {
-      console.log("There was an error finding the posts" + err);
-    } else {
-      res.render('post/feed', {
-        posts : allPosts
-      });
-    }
-  });
+  if (req.session.currentUser) {
+    Post.find({}, function (err, allPosts) {
+      if (err) {
+        console.log("There was an error finding the posts" + err);
+      } else {
+        res.render('post/feed', {
+          posts : allPosts
+        });
+      }
+    });
+  } else {
+    res.redirect(302, '/')
+  }
 })
 
 ///individual post view for author pathway WILL HAVE EDIT AND DELETE
@@ -84,7 +93,7 @@ router.get('/:id/view', function (req, res) {
   });
 });
 
-router.get('/:id/edit', function (req, res) {
+router.get('/post/:id/edit', function (req, res) {
   var postID = req.params.id;
 
   Post.findOne({
@@ -101,10 +110,12 @@ router.get('/:id/edit', function (req, res) {
 
 });
 
-router.patch('/:id/edit ', function (req, res) {
+router.patch('/post/:id/edit', function (req, res) {
   var postID = req.params.id,
-      postAtrribs = req.params.post;
+      postAtrribs = req.body.post;
 
+  console.log(postID);
+  console.log(req.body);
   Post.findOne({
     _id : postID
   }, function (err, foundPost) {

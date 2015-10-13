@@ -4,8 +4,7 @@
 <h3> <%= thisUser.name %> </h3>
 
 
-<!-- This should only be available when it is a user's own post -->
-<a href="/users/<%= thisUser._id %>/edit">[Edit]</a>
+<a href="/users/user/<%= thisUser._id %>/edit">[Edit]</a>
 
 <div class="form-group">
   <form class="delete" action="?_method=DELETE" method="POST">

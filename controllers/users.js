@@ -26,7 +26,7 @@ var express = require('express'),
       if (user && user.password === login.password) {
         req.session.currentUser = user;
 
-        res.redirect(302, '/posts/feed')
+        res.redirect(302, '/welcome')
       } else {
         res.redirect(302, '/')
       }
@@ -52,11 +52,11 @@ var express = require('express'),
 
 ///pathway to view user info
 router.get('/:id/view', function (req, res) {
-  var userID = req.params.id;
-  console.log(userID);
+  var userName = req.session.currentUser.username
+  console.log(userName);
 
   User.findOne({
-    _id : userID
+    username : userName
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
@@ -69,10 +69,57 @@ router.get('/:id/view', function (req, res) {
 });
 
 
+
 ///pathway to edit user page
 router.get('/user/:id/edit', function (req, res) {
-  res.render('/user/:id/edit');
+  var userID = req.params.id;
+
+  User.findOne({
+    _id : userID
+  }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render('user/edit', {
+        user : foundUser
+      });
+    }
+  });
 });
 
+router.patch('user/:id/edit ', function (req, res) {
+  var userId = req.params.id,
+      userAtrribs = req.params.user;
+
+  User.findOne({
+    _id : userId
+  }, function (err, foundUser) {
+    if (err) {
+      console.log(err);
+    } else {
+      foundUser.update(userAtrribs, function (errDos, user) {
+        if (errDos) {
+          console.log(errDos);
+        } else {
+          res.redirect(302, '/users/view');
+        }
+      });
+    }
+  });
+});
+
+router.delete('/:id/view', function (req, res) {
+  var userId = req.params.id;
+
+  Post.remove({
+    _id : userId
+  }, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect(302, '/users/new');
+    }
+  });
+});
 
   module.exports = router;
