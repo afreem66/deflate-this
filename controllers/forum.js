@@ -26,7 +26,7 @@ var express = require('express'),
 
     User.findOne({username : login.username}, function (err, user) {
       if (user && user.password === login.password) {
-        req.session.currentUser = user.username;
+        req.session.currentUser = user;
 
         res.redirect(302, '/forum/post/feed')
       } else {
@@ -79,7 +79,9 @@ router.get('/user/:id/edit', function (req, res) {
 ///pathway to write a post form
 
 router.get('/post/new', function (req, res) {
-  res.render('post/new');
+  res.render('post/new', {
+    user : req.session.currentUser
+  });
 });
 
 router.post('/post/new', function (req, res) {
@@ -118,7 +120,7 @@ router.get('/post/:id/authorView', function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      if (req.session.currentUser) {
+      if (req.session.currentUser.username === foundPost.author) {
         res.render('post/authorView', {
           thisPost : foundPost
         });
