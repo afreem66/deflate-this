@@ -24,7 +24,11 @@ router.get('/new', function (req, res) {
 });
 
 router.post('/new', function (req, res) {
-  var newPost = new Post(req.body.post)
+  var newPost = new Post({
+    author : req.session.currentUser.username,
+    title: req.body.post.title,
+    content: req.body.post.content
+  })
   console.log(newPost);
 
   newPost.save(function (err) {
@@ -44,7 +48,7 @@ router.get('/feed', function (req, res) {
         console.log("There was an error finding the posts" + err);
       } else {
         res.render('post/feed', {
-          posts : allPosts
+          posts : allPosts,
         });
       }
     });
@@ -65,11 +69,11 @@ router.get('/:id/authorView', function (req, res) {
     } else {
       if (req.session.currentUser.username === foundPost.author) {
         res.render('post/authorView', {
-          thisPost : foundPost
+          thisPost : foundPost,
         });
       } else {
         res.render('post/view', {
-          thisPost : foundPost
+          thisPost : foundPost,
         });
       }
     }
