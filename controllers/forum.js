@@ -13,13 +13,31 @@ var express = require('express'),
 
   //pathway to create user page
 
-  router.get('/user/new', function(req, res) {
+  router.get('/user/new', function (req, res) {
     res.render('user/new');
+  });
+
+  router.get('/user/login', function (req, res) {
+    res.render('user/login')
+  });
+
+  router.post('/user/login', function (req, res) {
+    var login = req.body.user
+
+    User.findOne({username : login.username}, function (err, user) {
+      if (user && user.password === login.password) {
+        req.session.currentUser = user.username;
+
+        res.redirect(302, '/forum/post/feed')
+      } else {
+        res.redirect(302, '/')
+      }
+    });
   });
 
   ///creating a user pathway SHOULD BE FOR AUTHOR ONLY AND TAKE TO AUTHOR ONLY VIEW
 
-  router.post('/user/new', function(req, res) {
+  router.post('/user/new', function (req, res) {
     var newUser = new User(req.body.user)
     req.session.username = req.body.user.username
     console.log(req.session);
@@ -79,7 +97,7 @@ router.post('/post/new', function (req, res) {
 
 /// feed view pathway
 router.get('/post/feed', function (req, res) {
-  Post.find({}, function(err, allPosts) {
+  Post.find({}, function (err, allPosts) {
     if (err) {
       console.log("There was an error finding the posts" + err);
     } else {
@@ -91,18 +109,24 @@ router.get('/post/feed', function (req, res) {
 })
 
 ///individual post view for author pathway WILL HAVE EDIT AND DELETE
-router.get('/post/:id/authorView', function(req, res) {
+router.get('/post/:id/authorView', function (req, res) {
   var postId = req.params.id;
 
   Post.findOne({
     _id : postId
-  }, function(err, foundPost) {
+  }, function (err, foundPost) {
     if (err) {
       console.log(err);
     } else {
-      res.render('post/authorView', {
-        thisPost : foundPost
-      });
+      if (req.session.currentUser) {
+        res.render('post/authorView', {
+          thisPost : foundPost
+        });
+      } else {
+        res.render('post/view', {
+          thisPost : foundPost
+        });
+      }
     }
   });
 });
@@ -147,7 +171,7 @@ router.patch('post/:id/edit ', function (req, res) {
 
   Post.findOne({
     _id : postID
-  }, function(err, foundPost) {
+  }, function (err, foundPost) {
     if (err) {
       console.log(err);
     } else {
@@ -167,13 +191,13 @@ router.patch('post/:id/edit ', function (req, res) {
 ///first grabs the id from the params then finds the post in the db by id
 ///it then redirects to the updated feed
 
-router.delete('/post/:id/authorView', function(req, res) {
+router.delete('/post/:id/authorView', function (req, res) {
   var postId = req.params.id;
 
 
   Post.remove({
     _id : postId
-  }, function(err) {
+  }, function (err) {
     if (err) {
       console.log(err);
     } else {
