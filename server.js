@@ -35,18 +35,22 @@ server.use(morgan('dev'));
 server.use(expressLayouts);
 
 ///server pathways
-var forumController = require('./controllers/forum.js');
-server.use('/forum', forumController);
+// var forumController = require('./controllers/forum.js');
+// server.use('/forum', forumController);
+
+///server pathways
+var usersController = require('./controllers/users.js');
+server.use('/users', usersController);
+
+///server pathways
+var postsController = require('./controllers/posts.js');
+server.use('/posts', postsController);
 
 //pathway to homepage
 server.use('/', function(req, res) {
   res.render('welcome');
 });
 
-server.use( function (req, res, next) {
-  console.log(req.body);
-  console.log(req.session);
-})
 
 //connecting mongoose
 mongoose.connect(MONGOURI + "/" + dbname);
