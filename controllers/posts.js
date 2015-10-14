@@ -52,12 +52,14 @@ router.post('/new', function (req, res) {
 
 router.get('/feed', function (req, res) {
   if (req.session.currentUser) {
-    Post.find({}, function (err, allPosts) {
+    Post.find({}).sort({
+       votes : -1
+     }).exec(function (err, orderedPosts) {
       if (err) {
         console.log("There was an error finding the posts" + err);
       } else {
         res.render('post/feed', {
-          posts : allPosts,
+          posts : orderedPosts,
         });
       }
     });
@@ -140,6 +142,8 @@ poastAttribs = {
   }
 }
 */
+///patch pathway to create up or down votes!
+
 
 router.patch('/post/:id/vote', function (req, res) {
   var postId = req.params.id,
