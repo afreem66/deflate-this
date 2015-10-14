@@ -89,8 +89,8 @@ router.get('/view', function (req, res) {
 
 
 
-///pathway to edit user page which fires when you click the eit link in the profile
-///finds by
+///pathway to edit user form which fires when you click the eit link in the profile
+///finds by user name from currentUser
 router.get('/edit', function (req, res) {
   var name = req.session.currentUser.username
 
@@ -107,6 +107,8 @@ router.get('/edit', function (req, res) {
   });
 });
 
+///Updates the db entry for this user. Found by username from sessions.
+///redirects to the userview profile page
 router.patch('/edit', function (req, res) {
   var name = req.session.currentUser.username,
       userAtrribs = req.body.user;
@@ -128,9 +130,10 @@ router.patch('/edit', function (req, res) {
   });
 });
 
+///this deletes a user profile entry in the db by finding by sessions.currentUser
+/// and then removing.
 router.delete('/view', function (req, res) {
-  // var userId = req.params.id;
-    var name = req.session.currentUser.username;
+  var name = req.session.currentUser.username;
 
   User.remove({
     username : name
@@ -142,5 +145,7 @@ router.delete('/view', function (req, res) {
     }
   });
 });
+
+///exports the router to server.js
 
   module.exports = router;

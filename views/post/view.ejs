@@ -12,7 +12,7 @@
 
 <!-- Lets get to this once other functionality is finished -->
 <div class="form-group">
-  <form class="comment" action="/posts/:id/view" method="POST">
+  <form class="comment" action="/posts/<%= thisPost._id %>/view?_method=PATCH" method="POST">
     <label for="comment">Comments</label>
     <br/>
     <input class="form-control"

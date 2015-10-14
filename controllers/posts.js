@@ -80,24 +80,25 @@ router.get('/:id/view', function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      // res.render('post/authorView', {
-      //   thisPost : foundPost
-      // });
-      if (req.session.currentUser.username === foundPost.author) {
-        res.render('post/authorView', {
-          thisPost : foundPost,
-        });
-      } else {
-        res.render('post/view', {
-          thisPost : foundPost
-        });
-      }
+      res.render('post/authorView', {
+        thisPost : foundPost,
+        author : req.session.currentUser.username
+      });
+      // if (req.session.currentUser.username === foundPost.author) {
+      //   res.render('post/authorView', {
+      //     thisPost : foundPost,
+      //   });
+      // } else {
+      //   res.render('post/view', {
+      //     thisPost : foundPost
+      //   });
+      // }
     }
   });
 });
 
 ///post comments
-router.post('/:id/view', function (req, res) {
+router.patch('/:id/view', function (req, res) {
   var comment = {
     content : req.body.comment,
     author : req.session.currentUser.username
@@ -105,10 +106,10 @@ router.post('/:id/view', function (req, res) {
   var postId = req.params.id;
   console.log(req.body);
   console.log(comment);
+  console.log(postId);
 
-  Post.findByIdAndUpdate({
-    _id : req.params.id
-    },
+  Post.findByIdAndUpdate(
+    postId,
     { $push: {comments: comment}},
     function (err, foundPost) {
       if (err) {
