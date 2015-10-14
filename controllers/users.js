@@ -56,7 +56,6 @@ var express = require('express'),
   ///and sends you to the user profile page
 
   router.post('/new', function (req, res) {
-    var newUser = req.body.user;
 
     User.findOne({ username : req.body.user.username},
     function (err, user) {
@@ -66,27 +65,29 @@ var express = require('express'),
         res.redirect(302, '/');
       } else {
         bcrypt.genSalt(10, function (saltErr, salt) {
-          bcrypt.hash(req.params.user.password,
+          bcrypt.hash(req.body.user.password,
           salt, function(hashErr, hash) {
-            newUser = new User({
-            email : req.body.user.username,
+            var newUser = new User({
+            username : req.body.user.username,
             passwordDigest: hash,
             name : req.body.user.name,
             viewpoint : req.body.user.viewpoint})
-          })
-        })
-      }
-    });
 
-    newUser.save(function (saveErr, savedUser) {
-      if (saveErr) {
-        console.log("There was an error, " + saveErr);
-      } else {
-        req.session.currentUser = savedUser;
-        res.redirect(302, '/users/view');
-      }
+            newUser.save(function (saveErr, savedUser) {
+              if (saveErr) {
+                console.log("There was an error, " + saveErr);
+              } else {
+                req.session.currentUser = savedUser;
+                res.redirect(302, '/users/' + newUser.username + '/view');
+              }
+            });
+          });
+        });
+      };
     });
   });
+
+
 
 ///pathway to view user info which fires by hitting the profile link
 ///finds the user by session.currentUser.name and renders the page by passing
