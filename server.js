@@ -47,14 +47,16 @@ var postsController = require('./controllers/posts.js');
 server.use('/posts', postsController);
 
 server.get('/welcome', function (req, res) {
-  res.render('welcome');
+  res.render('welcome', {
+    thisUser : req.session.currentUser.username
+  });
 });
-server.get('/', function (req, res) {
-  res.render('loginWall')
-})
+
 //pathway to homepage
 server.use('/', function(req, res) {
-  res.render('loginWall');
+  res.render('loginWall', {
+    currentUser : req.session.currentUser
+  });
 });
 
 

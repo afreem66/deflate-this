@@ -91,7 +91,8 @@ router.get('/:username/view', function (req, res) {
           } else {
             res.render('user/view', {
               thisUser : foundUser,
-              posts : foundPosts
+              posts : foundPosts,
+              currentUser : req.session.currentUser.name
           });
         }
       });
