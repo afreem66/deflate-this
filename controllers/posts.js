@@ -67,9 +67,8 @@ router.get('/feed', function (req, res) {
 })
 
 ///individual post view fires when post title is clicked. Finds in db by postID
-///from params and passes to either author view or jsut view ejs files.
-///Goes to author view if the currentUser is equal to post author.
-/// author view file has edit and delete functions
+///from params and passes to view ejs file. passes in currentUser for conditional
+///to determine if it should show author functionality like delete and edit.
 
 router.get('/:id/view', function (req, res) {
   var postId = req.params.id;
@@ -80,24 +79,18 @@ router.get('/:id/view', function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render('post/authorView', {
+      res.render('post/view', {
         thisPost : foundPost,
         author : req.session.currentUser.username
       });
-      // if (req.session.currentUser.username === foundPost.author) {
-      //   res.render('post/authorView', {
-      //     thisPost : foundPost,
-      //   });
-      // } else {
-      //   res.render('post/view', {
-      //     thisPost : foundPost
-      //   });
-      // }
     }
   });
 });
 
-///post comments
+///uses method override and patch to update the post entry array of comments.
+///Creates comment object from req.body and currentUser.username
+///Uses findByIdAndUpdate to find the post and then push's the comment object
+///into the comments array and redirects to the posts' view
 router.patch('/:id/view', function (req, res) {
   var comment = {
     content : req.body.comment,
@@ -115,13 +108,10 @@ router.patch('/:id/view', function (req, res) {
       if (err) {
         console.log(err);
       } else {
-        if (comment.author === foundPost.author) {
-          res.redirect(302, 'post/authorView');
-        } else {
-         res.redirect(302, 'post/view');
+          res.redirect(302, '/posts/' + req.params.id + '/view');
         }
       }
-    }
+
   );
 });
 ///pathway to edit a post. Fires when edit linked is clicked in authorView view.
@@ -152,6 +142,7 @@ router.patch('/post/:id/edit', function (req, res) {
 
   console.log(postID);
   console.log(req.body);
+
   Post.findOne({
     _id : postID
   }, function (err, foundPost) {
@@ -162,7 +153,7 @@ router.patch('/post/:id/edit', function (req, res) {
         if (errDos) {
           console.log(errDos);
         } else {
-          res.redirect(302, '/posts/feed');
+          res.redirect(302, '/feed');
         }
       });
     }
@@ -174,7 +165,7 @@ router.patch('/post/:id/edit', function (req, res) {
 ///first grabs the id from the params then finds the post in the db by id
 ///it then redirects to the updated feed
 
-router.delete('/:id/authorView', function (req, res) {
+router.delete('/:id/view', function (req, res) {
   var postId = req.params.id;
 
 

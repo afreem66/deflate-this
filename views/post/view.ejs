@@ -1,5 +1,6 @@
 <a class="back-button" href="/posts/feed">Back</a>
-<h2> <%= thisPost.title %> </h2>
+
+<h2> <%= thisPost.title %></h2>
 <h3> <%= thisPost.author %> </h3>
 <h4> <%= thisPost.viewpoint %> </h4>
 <p>
@@ -8,18 +9,31 @@
 <p>
   <%= thisPost.date %>
 </p>
+<!-- <p>
+  <%= thisPost.comments %>
+</p> -->
 
+<!-- This should only be available when it is a user's own post -->
+<% if(author === thisPost.author) { %>
+<a href="/posts/<%= thisPost._id %>/edit">[Edit]</a>
 
+<div class="form-group">
+  <form class="delete" action="?_method=DELETE" method="POST">
+    <input class="form-control"
+           type="submit"
+           value="Delete">
+  </form>
+</div>
+<% } %>
 <!-- Lets get to this once other functionality is finished -->
 <div class="form-group">
   <form class="comment" action="/posts/<%= thisPost._id %>/view?_method=PATCH" method="POST">
     <label for="comment">Comments</label>
     <br/>
-    <input class="form-control"
-           type="text"
-           name="comment[content]" id="comment"
+    <input type="text"
+           name="comment" id="comment"
            placeholder="Leave your comment here">
     <br/>
-    <input type="submit" value="Comment">
+    <input type="submit">
   </form>
 </div>
