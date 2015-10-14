@@ -1,7 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     session = require('express-session'),
-    User = require('../models/userModel.js');
+    User = require('../models/userModel.js'),
+    Post = require('../models/postModel.js');
 
     router.use(session({
       secret: "FUNKE",
@@ -70,8 +71,8 @@ var express = require('express'),
 ///pathway to view user info which fires by hitting the profile link
 ///finds the user by session.currentUser.name and renders the page by passing
 ///in the found user's information
-router.get('/view', function (req, res) {
-  var name = req.session.currentUser.username
+router.get('/:username/view', function (req, res) {
+  var name = req.params.username
   console.log(name);
 
   User.findOne({

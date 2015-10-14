@@ -2,7 +2,8 @@ var express = require('express'),
     router = express.Router(),
     session = require('express-session'),
     mongoose = require('mongoose'),
-    Post = require('../models/postModel.js');
+    Post = require('../models/postModel.js'),
+    User = require('../models/userModel.js');
 
 
     router.use(session({
@@ -47,8 +48,9 @@ router.post('/new', function (req, res) {
 })
 
 /// feed view pathway fired when header link clicked. Finds all post instances
-///and passes them to the feed ejs file
+///and sorts them by votes descending, then passes them to the feed ejs file
 ///If no one is logged in sends to login wall.
+///The exec allows you to put a callback on the .sort()
 
 router.get('/feed', function (req, res) {
   if (req.session.currentUser) {

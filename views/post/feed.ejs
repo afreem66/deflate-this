@@ -1,6 +1,6 @@
 <% posts.forEach(function (post) { %>
    <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
-  <h4> <%= post.author %> </h4>
+  <h4> <a href="/users/<%= post.author %>/view"> <%= post.author %> </a> </h4>
   <h5> <%= post.viewpoint %> </h5>
   <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
     <input type="submit" name="vote" value="Up Vote">
