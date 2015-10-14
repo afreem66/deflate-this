@@ -132,6 +132,36 @@ router.get('/:id/edit', function (req, res) {
 
 });
 
+/*
+var voteValue = (req.body.vote === 'Up Vote')?1:-1;
+poastAttribs = {
+  $inc: {
+    votes: voteValue;
+  }
+}
+*/
+
+router.patch('/post/:id/vote', function (req, res) {
+  var postId = req.params.id,
+      voteValue = (req.body.vote === 'Down Vote')?-1 : 1;
+  console.log(postId);
+  console.log(req.body);
+  console.log(voteValue);
+
+  Post.findByIdAndUpdate(
+    postId,
+    { $inc: {votes: voteValue}},
+    function (err, foundPost) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect(302, '/posts/feed')
+      }
+    }
+  );
+});
+
+
 ////pathway to edit information in db. This uses method override and patch to
 ///find a post then upadate it. It then redirects to the feed
 router.patch('/post/:id/edit', function (req, res) {

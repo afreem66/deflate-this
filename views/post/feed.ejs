@@ -1,11 +1,10 @@
 <% posts.forEach(function (post) { %>
-   <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.likes%></h3>
+   <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
   <h4> <%= post.author %> </h4>
   <h5> <%= post.viewpoint %> </h5>
-  <h5>Votes: <%=post.votes %> </h5>
-  <form class="vote" action="/posts/post/<%= post._id %>/edit?_method=PATCH" method="POST">
-    <input type="submit" name="upvote" value="Up Vote">
-    <input type="submit" name="downvote" value="Down Vote">
+  <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
+    <input type="submit" name="vote" value="Up Vote">
+    <input type="submit" name="vote" value="Down Vote">
   </form>
   <p>
     <%= post.content %>
