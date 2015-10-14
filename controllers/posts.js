@@ -93,8 +93,8 @@ router.get('/:id/view', function (req, res) {
 ///into the comments array and redirects to the posts' view
 router.patch('/:id/view', function (req, res) {
   var comment = {
-    content : req.body.comment,
-    author : req.session.currentUser.username
+    author : req.session.currentUser.username ,
+    content : req.body.comment
   };
   var postId = req.params.id;
   console.log(req.body);
@@ -167,7 +167,6 @@ router.patch('/post/:id/edit', function (req, res) {
 
 router.delete('/:id/view', function (req, res) {
   var postId = req.params.id;
-
 
   Post.remove({
     _id : postId
