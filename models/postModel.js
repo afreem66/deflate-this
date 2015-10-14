@@ -5,6 +5,7 @@ var postSchema = new Schema ({
   title: {type: String},
   author: {type: String},
   viewpoint: {type: String},
+  votes: {type: Number},
   content: {type: String},
   date: {type: Date, default: Date.now},
   comments: []

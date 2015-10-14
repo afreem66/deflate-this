@@ -5,7 +5,7 @@ var userSchema = new Schema ({
   username: {type : String},
   password: {type: String},
   name: {type: String},
-  team: {type: String}
+  viewpoint: {type: String}
 
 }, {collection: 'user', strict: false});
 

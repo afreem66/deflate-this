@@ -11,7 +11,7 @@ var express = require('express'),
       saveUninitialized: true
     }));
 
-///pathway to write a post form
+///pathway to post form. renders form only if you are logged in, otherwise redirects to loginwall
 
 router.get('/new', function (req, res) {
   if (req.session.currentUser) {
@@ -24,7 +24,10 @@ router.get('/new', function (req, res) {
 
 });
 
-///makes a post and saves to db
+///makes a new post instance and populates author with session.currentUser,
+///viewpoint with current user, and title and content from req.body and saves to db
+///redirects to feed of posts
+
 router.post('/new', function (req, res) {
   var newPost = new Post({
     author : req.session.currentUser.username,
@@ -43,7 +46,10 @@ router.post('/new', function (req, res) {
   })
 })
 
-/// feed view pathway
+/// feed view pathway fired when header link clicked. Finds all post instances
+///and passes them to the feed ejs file
+///If no one is logged in sends to login wall.
+
 router.get('/feed', function (req, res) {
   if (req.session.currentUser) {
     Post.find({}, function (err, allPosts) {
@@ -60,7 +66,11 @@ router.get('/feed', function (req, res) {
   }
 })
 
-///individual post view for author pathway WILL HAVE EDIT AND DELETE
+///individual post view fires when post title is clicked. Finds in db by postID
+///from params and passes to either author view or jsut view ejs files.
+///Goes to author view if the currentUser is equal to post author.
+/// author view file has edit and delete functions
+
 router.get('/:id/view', function (req, res) {
   var postId = req.params.id;
 
@@ -70,6 +80,9 @@ router.get('/:id/view', function (req, res) {
     if (err) {
       console.log(err);
     } else {
+      // res.render('post/authorView', {
+      //   thisPost : foundPost
+      // });
       if (req.session.currentUser.username === foundPost.author) {
         res.render('post/authorView', {
           thisPost : foundPost,
@@ -110,7 +123,9 @@ router.post('/:id/view', function (req, res) {
     }
   );
 });
-
+///pathway to edit a post. Fires when edit linked is clicked in authorView view.
+///finds post by id and updates info saved in db. Also autopopulates the edit ejs form
+///which is rendered by passing in foundPost.
 router.get('/post/:id/edit', function (req, res) {
   var postID = req.params.id;
 
@@ -128,6 +143,8 @@ router.get('/post/:id/edit', function (req, res) {
 
 });
 
+////pathway to edit information in db. This uses method override and patch to
+///find a post then upadate it. It then redirects to the feed
 router.patch('/post/:id/edit', function (req, res) {
   var postID = req.params.id,
       postAtrribs = req.body.post;
@@ -170,5 +187,7 @@ router.delete('/:id/authorView', function (req, res) {
     }
   });
 });
+
+///exports router to server.js
 
   module.exports = router;

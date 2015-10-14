@@ -9,7 +9,8 @@ var express = require('express'),
       saveUninitialized: true
     }));
 
-  //pathway to create user page
+  //This adds lgoout functionality. This fires when the logout link is clicked
+  //it sets the currentUser to null and then redirects to loginWall
   router.get('/logout', function (req, res) {
     req.session.currentUser = null;
 
@@ -18,14 +19,20 @@ var express = require('express'),
     res.redirect(302, '/loginWall')
   });
 
+///This takes the usre to the new user form when you click create a user
   router.get('/new', function (req, res) {
     res.render('user/new');
   });
 
+///This route takes the user to the login form page
   router.get('/login', function (req, res) {
     res.render('user/login')
   });
 
+///This route logs the user in. It searches the User collection for a username
+///that matches what was entered in the form. If they are equal it sets the
+///session current user to that user object, and redirects to the welcome page.
+///otherwise redirects to the loginWall
   router.post('/login', function (req, res) {
     var login = req.body.user
 
@@ -41,11 +48,12 @@ var express = require('express'),
   });
 
 
-  ///creating a user pathway SHOULD BE FOR AUTHOR ONLY AND TAKE TO AUTHOR ONLY VIEW
+  ///creating a user entry in the db by filling the schema with the form entries
+  ///it then sets the current user to the newly created user aka logs you in
+  ///and sends you to the user profile page
 
   router.post('/new', function (req, res) {
     var newUser = new User(req.body.user)
-    req.session.username = req.body.user.username
     console.log(req.session);
     console.log(newUser);
 
@@ -53,12 +61,15 @@ var express = require('express'),
       if (err) {
         console.log("There was an error, " + err);
       } else {
-        res.redirect(302, '/users/' + user._id + '/view');
+        req.session.currentUser = user;
+        res.redirect(302, '/users/view');
       }
     });
   });
 
-///pathway to view user info
+///pathway to view user info which fires by hitting the profile link
+///finds the user by session.currentUser.name and renders the page by passing
+///in the found user's information
 router.get('/view', function (req, res) {
   var name = req.session.currentUser.username
   console.log(name);
@@ -78,12 +89,13 @@ router.get('/view', function (req, res) {
 
 
 
-///pathway to edit user page
-router.get('/user/:id/edit', function (req, res) {
-  var userId = req.params.id;
+///pathway to edit user page which fires when you click the eit link in the profile
+///finds by
+router.get('/edit', function (req, res) {
+  var name = req.session.currentUser.username
 
   User.findOne({
-    _id : userId
+    username : name
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
@@ -95,9 +107,9 @@ router.get('/user/:id/edit', function (req, res) {
   });
 });
 
-router.patch('user/:id/edit ', function (req, res) {
-  var userId = req.params.id,
-      userAtrribs = req.params.user;
+router.patch('/edit ', function (req, res) {
+  var name = req.session.currentUser.username,
+      userAtrribs = req.body.user;
 
   User.findOne({
     _id : userId

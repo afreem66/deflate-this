@@ -2,9 +2,10 @@
 <h3> <%= thisUser.username %> </h3>
 <h4> <%= thisUser.password %> </h4>
 <h3> <%= thisUser.name %> </h3>
+<h4> <%= thisUser.viewpoint %> </h4>
 
 
-<a href="/users/user/<%= thisUser._id %>/edit">[Edit]</a>
+<a href="/users/edit">[Edit]</a>
 
 <div class="form-group">
   <form class="delete" action="?_method=DELETE" method="POST">
