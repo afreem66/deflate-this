@@ -7,6 +7,7 @@ var postSchema = new Schema ({
   viewpoint: {type: String},
   content: {type: String},
   date: {type: Date, default: Date.now}
+  comments: []
 }, {collection: 'post', strict : false});
 
 var Post = mongoose.model('Post', postSchema)
