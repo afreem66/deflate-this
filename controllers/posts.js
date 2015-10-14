@@ -61,8 +61,6 @@ router.get('/feed', function (req, res) {
         });
       }
     });
-  } else {
-    res.redirect(302, '/')
   }
 })
 
