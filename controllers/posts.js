@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    session = require('express-session');
+    session = require('express-session'),
+    mongoose = require('mongoose'),
     Post = require('../models/postModel.js');
 
 
@@ -23,6 +24,7 @@ router.get('/new', function (req, res) {
 
 });
 
+///makes a post and saves to db
 router.post('/new', function (req, res) {
   var newPost = new Post({
     author : req.session.currentUser.username,
@@ -74,11 +76,39 @@ router.get('/:id/view', function (req, res) {
         });
       } else {
         res.render('post/view', {
-          thisPost : foundPost,
+          thisPost : foundPost
         });
       }
     }
   });
+});
+
+///post comments
+router.post('/:id/view', function (req, res) {
+  var comment = {
+    content : req.body.comment,
+    author : req.session.currentUser.username
+  };
+  var postId = req.params.id;
+  console.log(req.body);
+  console.log(comment);
+
+  Post.findByIdAndUpdate({
+    _id : req.params.id
+    },
+    { $push: {comments: comment}},
+    function (err, foundPost) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (comment.author === foundPost.author) {
+          res.redirect(302, 'post/authorView');
+        } else {
+         res.redirect(302, 'post/view');
+        }
+      }
+    }
+  );
 });
 
 router.get('/post/:id/edit', function (req, res) {

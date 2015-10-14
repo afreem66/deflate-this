@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    session = require('express-session');
+    session = require('express-session'),
     User = require('../models/userModel.js');
 
     router.use(session({

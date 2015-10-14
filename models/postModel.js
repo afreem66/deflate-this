@@ -6,7 +6,7 @@ var postSchema = new Schema ({
   author: {type: String},
   viewpoint: {type: String},
   content: {type: String},
-  date: {type: Date, default: Date.now}
+  date: {type: Date, default: Date.now},
   comments: []
 }, {collection: 'post', strict : false});
 

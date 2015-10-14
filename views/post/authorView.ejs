@@ -9,9 +9,12 @@
 <p>
   <%= thisPost.date %>
 </p>
+<!-- <p>
+  <%= thisPost.comments %>
+</p> -->
 
 <!-- This should only be available when it is a user's own post -->
-<a href="/posts/post/<%= thisPost._id %>/edit">[Edit]</a>
+<a href="/posts/<%= thisPost._id %>/edit">[Edit]</a>
 
 <div class="form-group">
   <form class="delete" action="?_method=DELETE" method="POST">
@@ -22,7 +25,7 @@
 </div>
 <!-- Lets get to this once other functionality is finished -->
 <div class="form-group">
-  <form class="comment" action="edit or something" method="POST">
+  <form class="comment" action="/posts/:id/view" method="POST">
     <label for="comment">Comments</label>
     <br/>
     <input type="text"
