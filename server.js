@@ -9,7 +9,8 @@ var express = require('express'),
     expressLayouts = require('express-ejs-layouts'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
-    session = require('express-session');
+    session = require('express-session'),
+    bcrypt = require('bcryptjs');
 
 ///defining path for
   server.set('views', './views');

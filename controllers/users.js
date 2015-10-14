@@ -1,6 +1,8 @@
 var express = require('express'),
     router = express.Router(),
+    mongoose = require('mongoose'),
     session = require('express-session'),
+    bcrypt = require('bcryptjs'),
     User = require('../models/userModel.js'),
     Post = require('../models/postModel.js');
 
@@ -54,15 +56,33 @@ var express = require('express'),
   ///and sends you to the user profile page
 
   router.post('/new', function (req, res) {
-    var newUser = new User(req.body.user)
-    console.log(req.session);
-    console.log(newUser);
+    var newUser = req.body.user;
 
-    newUser.save(function (err, user) {
-      if (err) {
-        console.log("There was an error, " + err);
+    User.findOne({ username : req.body.user.username},
+    function (err, user) {
+      if(err) {
+        console.log(err);
+      } else if (user) {
+        res.redirect(302, '/');
       } else {
-        req.session.currentUser = user;
+        bcrypt.genSalt(10, function (saltErr, salt) {
+          bcrypt.hash(req.params.user.password,
+          salt, function(hashErr, hash) {
+            newUser = new User({
+            email : req.body.user.username,
+            passwordDigest: hash,
+            name : req.body.user.name,
+            viewpoint : req.body.user.viewpoint})
+          })
+        })
+      }
+    });
+
+    newUser.save(function (saveErr, savedUser) {
+      if (saveErr) {
+        console.log("There was an error, " + saveErr);
+      } else {
+        req.session.currentUser = savedUser;
         res.redirect(302, '/users/view');
       }
     });

@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var userSchema = new Schema ({
   username: {type : String},
-  password: {type: String},
+  passwordDigest: {type: String},
   name: {type: String},
   viewpoint: {type: String}
 
