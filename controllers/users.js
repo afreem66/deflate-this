@@ -107,12 +107,12 @@ router.get('/edit', function (req, res) {
   });
 });
 
-router.patch('/edit ', function (req, res) {
+router.patch('/edit', function (req, res) {
   var name = req.session.currentUser.username,
       userAtrribs = req.body.user;
 
   User.findOne({
-    _id : userId
+    username : name
   }, function (err, foundUser) {
     if (err) {
       console.log(err);
