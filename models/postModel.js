@@ -8,7 +8,7 @@ var postSchema = new Schema ({
   votes: {type: Number},
   content: {type: String},
   date: {type: Date, default: Date.now},
-  comments: []
+  comments: [ {author: String}, {content: String} ]
 }, {collection: 'post', strict : false});
 
 var Post = mongoose.model('Post', postSchema)

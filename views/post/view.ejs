@@ -9,9 +9,12 @@
 <p>
   <%= thisPost.date %>
 </p>
-<!-- <p>
-  <%= thisPost.comments %>
-</p> -->
+<% for(var i = 0; i < thisPost.comments.length; i++) { %>
+  <p>
+    <%= thisPost.comments[i].author %>: <%= thisPost.comments[i].content %>
+  </p>
+<% } %>
+
 
 <!-- This should only be available when it is a user's own post -->
 <% if(author === thisPost.author) { %>

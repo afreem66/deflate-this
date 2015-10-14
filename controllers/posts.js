@@ -117,7 +117,7 @@ router.patch('/:id/view', function (req, res) {
 ///pathway to edit a post. Fires when edit linked is clicked in authorView view.
 ///finds post by id and updates info saved in db. Also autopopulates the edit ejs form
 ///which is rendered by passing in foundPost.
-router.get('/post/:id/edit', function (req, res) {
+router.get('/:id/edit', function (req, res) {
   var postID = req.params.id;
 
   Post.findOne({
@@ -153,7 +153,7 @@ router.patch('/post/:id/edit', function (req, res) {
         if (errDos) {
           console.log(errDos);
         } else {
-          res.redirect(302, '/feed');
+          res.redirect(302, '/posts/feed');
         }
       });
     }
