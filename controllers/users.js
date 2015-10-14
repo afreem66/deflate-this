@@ -10,7 +10,7 @@ var express = require('express'),
       saveUninitialized: true
     }));
 
-  //This adds lgoout functionality. This fires when the logout link is clicked
+  //This adds logout functionality. This fires when the logout link is clicked
   //it sets the currentUser to null and then redirects to loginWall
   router.get('/logout', function (req, res) {
     req.session.currentUser = null;
@@ -81,8 +81,19 @@ router.get('/:username/view', function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render('user/view', {
-        thisUser : foundUser
+      Post.find({
+        author : name
+      }).sort({
+          votes : -1
+        }).exec(function (err, foundPosts) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.render('user/view', {
+              thisUser : foundUser,
+              posts : foundPosts
+          });
+        }
       });
     }
   });
