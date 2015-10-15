@@ -5,7 +5,14 @@
   font-family: 'Oxygen', sans-serif;
 }
 body {
-  background-color: lightgrey;
+  background-color: #F8F8F8;
+}
+a {
+  color: #333;
+}
+a:hover {
+  text-decoration: none;
+  color: lightgray;
 }
 nav {
   background: #777;
@@ -15,10 +22,7 @@ nav {
   z-index: 2;
   opacity: 0.9;
 }
-form {
-  margin: 0 auto;
-  width: 75%
-}
+
 h1 {
   text-align: center;
 }
@@ -28,6 +32,17 @@ li {
 }
 
 .start {
+  text-align: center;
+}
+
+form > div {
+  background: lightgray;
+  margin: 0 auto;
+  width: 40%;
+  border: #E8E8E8 solid 1px;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-top: 10%;
   text-align: center;
 }
 
@@ -59,7 +74,7 @@ li {
   z-index: 5;
 }
 
-#username {
+#user {
   position: fixed;
   right: 1.5%;
   top: 2%;
@@ -107,8 +122,6 @@ a > img {
   width: 5rem;
   animation: rotation 10s infinite;
 
-  transition: transform 2sec;
-  transform: rotate(360deg);
 }
 
 @keyframes rotation {
