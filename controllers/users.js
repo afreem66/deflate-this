@@ -37,7 +37,6 @@ var express = require('express'),
 ///session current user to that user object, and redirects to the welcome page.
 ///otherwise redirects to the loginWall
   router.post('/login', function (req, res) {
-    var login = req.body.user
 
     User.findOne({username : req.body.user.username}, function (err, user) {
       if (err) {
