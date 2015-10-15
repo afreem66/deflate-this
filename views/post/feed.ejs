@@ -1,24 +1,27 @@
+
 <% posts.forEach(function (post) { %>
-   <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
-  <h4> <a href="/users/<%= post.author %>/view"> <%= post.author %> </a> </h4>
-  <h5> <%= post.viewpoint %> </h5>
-  <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
-    <input type="submit" name="vote" value="Up Vote">
-    <input type="submit" name="vote" value="Down Vote">
-  </form>
-  <p>
-    <%= post.content %>
-  </p>
-  <p>
-    <% if (post.comments.length == 0) { %>
-      No Comments
-    <% } else if (post.comments.length == 1) { %>
-      1 Comment
-    <% } else { %>
-    <%= post.comments.length %> comments %>
-    <% } %>
-  </p>
-  <p>
-    <%= post.date %>
-  </p>
+  <div class="feed">
+    <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
+    <h4> <a href="/users/<%= post.author %>/view"> <%= post.author %> </a> </h4> <h5> <%= post.viewpoint %> </h5>
+    <p>
+      <%= post.content %>
+    </p>
+    <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
+      <input class="btn btn-default btn-xs" type="submit" name="vote" value="Up Vote">
+      <input class="btn btn-default btn-xs" type="submit" name="vote" value="Down Vote">
+    </form>
+
+    <p>
+      <% if (post.comments.length == 0) { %>
+        No Comments
+      <% } else if (post.comments.length == 1) { %>
+        1 Comment
+      <% } else { %>
+      <%= post.comments.length %> comments %>
+      <% } %>
+    </p>
+    <p>
+      <%= post.date %>
+    </p>
+  </div>
 <% }) %>

@@ -2,13 +2,54 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Oxygen', sans-serif;
 }
-
+body {
+  background: lightgrey;
+  background-image: url(http://www.duetsblog.com/files/2014/10/NFLShieldLogo.jpeg);
+  background-size: contain;
+}
+header {
+  background: #777;
+}
+form {
+  margin: 0 auto;
+  width: 75%
+}
 h1 {
   text-align: center;
-  background: red;
 }
 
 li {
   display: inline-block;
+}
+
+.start {
+  text-align: center;
+}
+
+.login {
+  margin-top: 15%;
+  text-align: center;
+}
+
+.login > ul {
+  padding: 2rem;
+  line-height: 2rem;
+  font-size: 4rem;
+}
+
+.feed {
+  text-align: center;
+  background: tan;
+  opacity: 0.8;
+  margin: 0.1rem auto;
+  padding: 1rem;
+  width: 75%;
+  /*moz-border-radius: 100px / 50px;
+  webkit-border-radius: 100px / 50px;*/
+  border-radius: 50% / 50%;
+}
+.feed > * {
+  opacity: 1;
 }
