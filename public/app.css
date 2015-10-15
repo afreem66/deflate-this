@@ -116,23 +116,30 @@ form > div {
   right: 1.5%;
   transition: 1s all ease;
 }
+.mainfeed {
+  background-image: url(http://i.nflcdn.com/static/content/public/static/img/navigation/shields/header-shield.300x250.png);
+  background-size: cover;
+}
 .feed {
   position: relative;
   text-align: center;
-  background: #D1C2B2;
+  background: #F8F8F8;
   opacity: 0.7;
   margin: 0.1rem auto;
   padding: 1rem;
-  width: 75%;
-  moz-border-radius: 50% / 50%;
-  webkit-border-radius: 50% / 50%;
-  border-radius: 50% / 50%;
+  width: 60%;
+  moz-border-radius: 12px;
+  webkit-border-radius: 12px;
+  border-radius: 12px;
   border: #E8E8E8 solid 1px;
   transition: 0.5sec;
 }
 
 .feed:hover {
-  background: #D1C2B2;
+  background: #E8E8E8;
+  opacity: 0.95;
+}
+.feed > {
   opacity: 1;
 }
 
@@ -145,7 +152,22 @@ a > img {
   animation: rotation 10s infinite;
   z-index: 6;
 }
-
+.user-view {
+  text-align: left;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+.user-view > h2 {
+  text-align: center;
+  margin-left: 0;
+  margin-right: 0rem;
+  margin-top: 5rem;
+  border: #E8E8E8 solid 1px;
+  border-radius: 5px;
+}
+.posts {
+  text-decoration: underline;
+}
 @keyframes rotation {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}

@@ -1,27 +1,33 @@
+<div class="user-view">
+  <% if(currentUser === thisUser.name) { %>
+    <h2>your profile</h2>
+  <% } else { %>
+    <h2>Hello <%= currentUser %> why are looking at <%= thisUser.name %>'s page</h2>
+  <% } %>
+
+  <h3> Username : <%= thisUser.username %> </h3>
+  <h3> <%= thisUser.name %>'s <small> viewpoint on life aka deflategate : <%= thisUser.viewpoint %> </small></h3>
+
+
+  <h4 class="posts">Posts by <%= thisUser.name %> </h4>
+  <% posts.forEach(function (post) { %>
+  <h5> <%= post.title %>: <%= post.votes %> </h5>
+  <p>
+    <%= post.content %>
+  </p>
+  <% }) %>
+
 <% if(currentUser === thisUser.name) { %>
-  <h2>Hello <%= currentUser %> welcome to your profile</h2>
-<% } else { %>
-  <h2>Hello <%= currentUser %> why are looking at <%= thisUser.name %>'s page</h2>
-<% } %>
-
-<h3> Username : <%= thisUser.username %> </h3>
-<h3> <%= thisUser.name %> </h3>
-<h4> Viewpoint on life aka deflategate : <%= thisUser.viewpoint %> </h4>
-
-<h4>Posts by <%= thisUser.name %> </h4>
-<% posts.forEach(function (post) { %>
-<h5> <%= post.title %>: <%= post.votes %> </h5>
-<p>
-  <%= post.content %>
-</p>
-<% }) %>
-
-<a href="/users/edit">[Edit]</a>
-
-<div class="form-group">
-  <form class="delete" action="?_method=DELETE" method="POST">
-    <input class="form-control"
-           type="submit"
-           value="Delete">
-  </form>
+  <a class="btn btn-primary btn-md"href="/users/edit" role="button">edit</a>
+  </br>
+  </br>
+  </br>
+  <div class="form-group">
+    <form class="delete" action="?_method=DELETE" method="POST">
+      <input class="btn btn-danger btn-lg btn-block"
+             type="submit"
+             value="delete">
+    </form>
+  </div>
+    <% } %>
 </div>
