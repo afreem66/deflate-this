@@ -39,13 +39,22 @@ var express = require('express'),
   router.post('/login', function (req, res) {
     var login = req.body.user
 
-    User.findOne({username : login.username}, function (err, user) {
-      if (user && user.password === login.password) {
-        req.session.currentUser = user;
-
-        res.redirect(302, '/welcome')
+    User.findOne({username : req.body.user.username}, function (err, user) {
+      if (err) {
+          console.log(err);
+      } else if (user) {
+        bcrypt.compare(req.body.user.password, user.passwordDigest, function (compareErr, match) {
+          if (match) {
+            req.session.currentUser = user;
+            res.redirect(302, '/welcome');
+          } else {
+            console.log("Username and password combo is not a match");
+            res.redirect(302, '/');
+          }
+        });
       } else {
-        res.redirect(302, '/')
+        console.log("something bad happened");
+        res.redirect(302, '/');
       }
     });
   });
