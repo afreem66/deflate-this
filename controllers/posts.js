@@ -149,7 +149,7 @@ poastAttribs = {
 
 router.patch('/post/:id/vote', function (req, res) {
   var postId = req.params.id,
-      voteValue = (req.body.vote === 'Down Vote')?-1 : 1;
+      voteValue = (req.body.vote === 'down vote')?-1 : 1;
   console.log(postId);
   console.log(req.body);
   console.log(voteValue);

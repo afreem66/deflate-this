@@ -5,9 +5,7 @@
   font-family: 'Oxygen', sans-serif;
 }
 body {
-  background: lightgrey;
-  background-image: url(http://www.duetsblog.com/files/2014/10/NFLShieldLogo.jpeg);
-  background-size: contain;
+  background-color: lightgrey;
 }
 header {
   background: #777;

@@ -9,26 +9,30 @@
 <p>
   <%= thisPost.date %>
 </p>
-<% for(var i = 0; i < thisPost.comments.length; i++) { %>
-  <p>
-    <%= thisPost.comments[i].author %>: <%= thisPost.comments[i].content %>
-  </p>
-<% } %>
+<p>
+  Comments
+  <% for(var i = 0; i < thisPost.comments.length; i++) { %>
+    <p>
+      <%= thisPost.comments[i].author %>: <%= thisPost.comments[i].content %>
+    </p>
+  <% } %>
+</p>
+
 
 
 <!-- This should only be available when it is a user's own post -->
 <% if(author === thisPost.author) { %>
-<a href="/posts/<%= thisPost._id %>/edit">[Edit]</a>
+<a class="btn btn-primary btn-large " href="/posts/<%= thisPost._id %>/edit">edit</a>
 
 <div class="form-group">
   <form class="delete" action="?_method=DELETE" method="POST">
-    <input class="form-control"
+    <input class="btn btn-danger btn-large btn-block"
            type="submit"
-           value="Delete">
+           value="delete">
   </form>
 </div>
 <% } %>
-<!-- Lets get to this once other functionality is finished -->
+
 <div class="form-group">
   <form class="comment" action="/posts/<%= thisPost._id %>/view?_method=PATCH" method="POST">
     <label for="comment">Comments</label>
@@ -36,7 +40,6 @@
     <input type="text"
            name="comment" id="comment"
            placeholder="Leave your comment here">
-    <br/>
-    <input type="submit">
+    <input class="btn btn-default btn-large" type="Submit" value="comment">
   </form>
 </div>

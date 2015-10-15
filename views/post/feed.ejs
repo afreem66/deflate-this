@@ -1,4 +1,4 @@
-
+<a class="btn btn-default btn-lr btn-block" href="/posts/new">write</a>
 <% posts.forEach(function (post) { %>
   <div class="feed">
     <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
@@ -7,8 +7,8 @@
       <%= post.content %>
     </p>
     <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
-      <input class="btn btn-default btn-xs" type="submit" name="vote" value="Up Vote">
-      <input class="btn btn-default btn-xs" type="submit" name="vote" value="Down Vote">
+      <input class="btn btn-default btn-xs" type="submit" name="vote" value="up vote">
+      <input class="btn btn-default btn-xs" type="submit" name="vote" value="down vote">
     </form>
 
     <p>
