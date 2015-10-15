@@ -45,7 +45,7 @@ var express = require('express'),
         bcrypt.compare(req.body.user.password, user.passwordDigest, function (compareErr, match) {
           if (match) {
             req.session.currentUser = user;
-            res.redirect(302, '/welcome');
+            res.redirect(302, '/posts/feed');
           } else {
             console.log("Username and password combo is not a match");
             res.redirect(302, '/');

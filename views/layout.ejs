@@ -8,17 +8,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
   <body>
-    <nav>
+    <div id="football"><a href="#menu"><img src="http://shirtail.com/files/images/FootballArt111.gif" alt="football"/></a></div>
+    <nav id="menu">
       <ul class="site-header">
-        <li><a href="/">Home</a></li>
-        <li><a href="/posts/feed">View Feed</a></li>
-        <li><a href="/posts/new">Post</a></li>
-        <% if(user) { %>
-          <li><a href="/users/" + <%= user.username %> + "/view"> <%= user.username %></a></li>
-          <li><a href="/users/logout">logout</a></li>
-        <% } %>
+        <li><a class="btn btn-default btn-xs btn-block" href="/welcome" role="button">home</a></li>
+        <li><a class="btn btn-default btn-xs btn-block" href="/posts/feed" role="button">view feed</a></li>
+        <li><a class="btn btn-default btn-xs btn-block" href="/posts/new" role="button">post</a></li>
       </ul>
     </nav>
+    <% if(user) { %>
+    <div id="username">
+        <li><a class="btn btn-primary btn-sm" href="/users/<%= user.username %>/view" role="button"> <%= user.username %></a></li>
+        <li><a href="/users/logout">logout</a></li>
+    </div>
+    <% } %>
     <%- body %>
   </body>
 </html>

@@ -7,8 +7,13 @@
 body {
   background-color: lightgrey;
 }
-header {
+nav {
   background: #777;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  opacity: 0.9;
 }
 form {
   margin: 0 auto;
@@ -37,17 +42,51 @@ li {
   font-size: 4rem;
 }
 
+#menu {
+  position: fixed;
+  height: 8%;
+  left: -100%;
+  background: #333;
+  opacity: 0.85;
+  transition: 1s all ease;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+#menu:target {
+  left: 0%;
+  width: 100%;
+  z-index: 5;
+}
+
+#username {
+  position: fixed;
+  right: 0%;
+}
 .feed {
   text-align: center;
-  background: tan;
-  opacity: 0.8;
+  background: ;
   margin: 0.1rem auto;
   padding: 1rem;
   width: 75%;
-  /*moz-border-radius: 100px / 50px;
-  webkit-border-radius: 100px / 50px;*/
+  moz-border-radius: 50% / 50%;
+  webkit-border-radius: 50% / 50%;
   border-radius: 50% / 50%;
+  border: #E8E8E8 solid 1px;
 }
-.feed > * {
-  opacity: 1;
+
+a > img {
+  position: fixed;
+  display: inline-block;
+  height: 5rem;
+  width: 5rem;
+  animation: rotation 10s infinite;
+
+  transition: transform 2sec;
+  transform: rotate(360deg);
+}
+
+@keyframes rotation {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
 }
