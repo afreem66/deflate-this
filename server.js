@@ -35,10 +35,10 @@ server.use(morgan('dev'));
 
 server.use(expressLayouts);
 
-///server pathways
-// var forumController = require('./controllers/forum.js');
-// server.use('/forum', forumController);
-
+server.use(function (req, res, next) {
+  res.locals.user = req.session.currentUser;
+  next();
+})
 ///server pathways
 var usersController = require('./controllers/users.js');
 server.use('/users', usersController);
@@ -53,11 +53,9 @@ server.get('/welcome', function (req, res) {
   });
 });
 
-//pathway to homepage
+//catch all pathway brings you back to login or create user page
 server.use('/', function(req, res) {
-  res.render('loginWall', {
-    currentUser : req.session.currentUser
-  });
+  res.render('loginWall');
 });
 
 

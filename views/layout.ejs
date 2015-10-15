@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Forum Project</title>
-    <link rel="stylesheet" href="/app.css" >
+    <link rel="stylesheet" href="/app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
@@ -13,6 +13,10 @@
         <li><a href="/">Home</a></li>
         <li><a href="/posts/feed">View Feed</a></li>
         <li><a href="/posts/new">Post</a></li>
+        <% if(user) { %>
+          <li><a href="/users/" + <%= user.username %> + "/view"> <%= user.username %></a></li>
+          <li><a href="/users/logout">logout</a></li>
+        <% } %>
       </ul>
     </nav>
     <%- body %>
