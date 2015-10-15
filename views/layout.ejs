@@ -18,8 +18,13 @@
     </nav>
     <% if(user) { %>
     <div id="username">
-        <li><a class="btn btn-primary btn-sm" href="/users/<%= user.username %>/view" role="button"> <%= user.username %></a></li>
-        <li><a href="/users/logout">logout</a></li>
+        <a class="btn btn-primary btn-xs" href="#user-menu" role="button"> <%= user.username %></a>
+    </div>
+    <div id="user-menu">
+      <ul class="user-menu">
+        <li><a class="btn btn-default btn-xs btn block" href="/users/<%= user.username %>/view" role="button">View Profile</a></li>
+        <li><a class="btn btn-danger btn-xs btn-block"href="/users/logout" role="button">logout</a></li>
+      </ul>
     </div>
     <% } %>
     <%- body %>

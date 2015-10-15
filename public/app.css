@@ -46,7 +46,7 @@ li {
   position: fixed;
   height: 8%;
   left: -100%;
-  background: #333;
+  background: #C0C0C0;
   opacity: 0.85;
   transition: 1s all ease;
   padding-top: 1rem;
@@ -61,11 +61,29 @@ li {
 
 #username {
   position: fixed;
-  right: 0%;
+  right: 1.5%;
+  top: 2%;
 }
+#user-menu {
+  position: fixed;
+  top: -100%;
+  right: 1.5%;
+  transition: 1s all ease;
+  width:
+}
+#user-menu li {
+  display: block;
+  margin: 0.5rem;
+}
+#user-menu:target {
+  top: 6%;
+  right: 1%;
+
+}
+
 .feed {
   text-align: center;
-  background: ;
+  background: #D1C2B2;
   margin: 0.1rem auto;
   padding: 1rem;
   width: 75%;
@@ -73,11 +91,18 @@ li {
   webkit-border-radius: 50% / 50%;
   border-radius: 50% / 50%;
   border: #E8E8E8 solid 1px;
+  transition: 0.5sec;
+}
+
+.feed:hover {
+  background: #855C33;
+  opacity: 0.8;
 }
 
 a > img {
   position: fixed;
-  display: inline-block;
+  top: 0;
+  left: 0;
   height: 5rem;
   width: 5rem;
   animation: rotation 10s infinite;
