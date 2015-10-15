@@ -1,45 +1,50 @@
-<a class="back-button" href="/posts/feed">Back</a>
+<div class="post-view">
 
-<h2> <%= thisPost.title %></h2>
-<h3> <%= thisPost.author %> </h3>
-<h4> <%= thisPost.viewpoint %> </h4>
-<p>
-  <%= thisPost.content %>
-</p>
-<p>
-  <%= thisPost.date %>
-</p>
-<p>
-  Comments
-  <% for(var i = 0; i < thisPost.comments.length; i++) { %>
-    <p>
-      <%= thisPost.comments[i].author %>: <%= thisPost.comments[i].content %>
-    </p>
+  <a class="btn btn-default btn-md btn-block" href="/posts/feed" role="button">back</a>
+
+  <h2> <%= thisPost.title %></h2>
+  <h3> by: <%= thisPost.author %><small> who also thinks <%= thisPost.viewpoint %></small></h3>
+  <p>
+    <%= thisPost.content %>
+  </p>
+  <p>
+    <%= thisPost.date %>
+  </p>
+  <p class="comments">
+    Comments
+    <% for(var i = 0; i < thisPost.comments.length; i++) { %>
+      <p>
+        <%= thisPost.comments[i].author %>: <%= thisPost.comments[i].content %>
+      </p>
+    <% } %>
+  </p>
+</br>
+
+
+  <!-- This should only be available when it is a user's own post -->
+  <% if(author === thisPost.author) { %>
+  <a class="btn btn-primary btn-md" href="/posts/<%= thisPost._id %>/edit">edit</a>
+  </br>
+  </br>
+  <div class="form-group">
+    <form class="delete" action="?_method=DELETE" method="POST">
+      <input class="btn btn-danger btn-lg btn-block"
+             type="submit"
+             value="delete">
+    </form>
+  </div>
   <% } %>
-</p>
 
-
-
-<!-- This should only be available when it is a user's own post -->
-<% if(author === thisPost.author) { %>
-<a class="btn btn-primary btn-large " href="/posts/<%= thisPost._id %>/edit">edit</a>
-
-<div class="form-group">
-  <form class="delete" action="?_method=DELETE" method="POST">
-    <input class="btn btn-danger btn-large btn-block"
-           type="submit"
-           value="delete">
-  </form>
-</div>
-<% } %>
-
-<div class="form-group">
-  <form class="comment" action="/posts/<%= thisPost._id %>/view?_method=PATCH" method="POST">
-    <label for="comment">Comments</label>
-    <br/>
-    <input type="text"
-           name="comment" id="comment"
-           placeholder="Leave your comment here">
-    <input class="btn btn-default btn-large" type="Submit" value="comment">
-  </form>
+  <div class="form-group">
+    <form class="comment" action="/posts/<%= thisPost._id %>/view?_method=PATCH" method="POST">
+      <label for="comment">Comments</label>
+      <br/>
+      <input type="text"
+             name="comment" id="comment"
+             placeholder="if ya got em">
+      <br/>
+      <br/>
+      <input class="btn btn-default btn-sm" type="Submit" value="comment">
+    </form>
+  </div>
 </div>

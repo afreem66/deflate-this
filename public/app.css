@@ -7,6 +7,8 @@
 body {
   background-color: #F8F8F8;
   color: #333;
+  background-image: url(http://i.nflcdn.com/static/content/public/static/img/navigation/shields/header-shield.300x250.png);
+  background-size: cover;
 }
 a {
   color: #333;
@@ -153,12 +155,11 @@ a > img {
   z-index: 6;
 }
 .user-view {
-  text-align: left;
+  text-align: center;
   margin-left: 3rem;
   margin-right: 3rem;
 }
 .user-view > h2 {
-  text-align: center;
   margin-left: 0;
   margin-right: 0rem;
   margin-top: 5rem;
@@ -166,6 +167,24 @@ a > img {
   border-radius: 5px;
 }
 .posts {
+  text-decoration: underline;
+}
+
+.post-view {
+  text-align: center;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+.post-view > h2 {
+  text-decoration: underline;
+  margin-left: 0;
+  margin-right: 0rem;
+  margin-top: 5rem;
+}
+.comment {
+  text-align: center;
+}
+.comments {
   text-decoration: underline;
 }
 @keyframes rotation {

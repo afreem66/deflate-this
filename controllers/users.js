@@ -22,7 +22,7 @@ var express = require('express'),
     res.redirect(302, '/loginWall')
   });
 
-///This takes the usre to the new user form when you click create a user
+///This takes the user to the new user form when you click create a user
   router.get('/new', function (req, res) {
     res.render('user/new');
   });
@@ -33,9 +33,11 @@ var express = require('express'),
   });
 
 ///This route logs the user in. It searches the User collection for a username
-///that matches what was entered in the form. If they are equal it sets the
-///session current user to that user object, and redirects to the welcome page.
-///otherwise redirects to the loginWall
+///that matches what was entered in the form. If there is a match it checks the
+///the encrypted password to see if they are equal. if so it redirects to the
+/// feed page and it sets the session current user to that user object.
+///otherwise if anything fails like no username match or password username combo
+///doesnt exist it redirects to the loginWall
   router.post('/login', function (req, res) {
 
     User.findOne({username : req.body.user.username}, function (err, user) {
@@ -59,9 +61,12 @@ var express = require('express'),
   });
 
 
-  ///creating a user entry in the db by filling the schema with the form entries
-  ///it then sets the current user to the newly created user aka logs you in
-  ///and sends you to the user profile page
+///creating a user entry in the db. First it searches the database for any users
+///with that user name. If there is another, we redirect to the home page
+/// If there are none we move on by filling the schema with the form entries BUT
+///bcrypt encrypts the password it then saves the user in the db and
+///sets the current user to the newly created user aka logs you in and sends you
+///to the user profile page
 
   router.post('/new', function (req, res) {
 

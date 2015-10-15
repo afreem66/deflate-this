@@ -65,6 +65,8 @@ router.get('/feed', function (req, res) {
         });
       }
     });
+  } else {
+    res.redirect(302, '/');
   }
 })
 
@@ -136,15 +138,12 @@ router.get('/:id/edit', function (req, res) {
 
 });
 
-/*
-var voteValue = (req.body.vote === 'Up Vote')?1:-1;
-poastAttribs = {
-  $inc: {
-    votes: voteValue;
-  }
-}
-*/
-///patch pathway to create up or down votes!
+///patch pathway to create up or down votes! It grabs the post id to figure out
+///which post to add votes to. Then it defines the vote value depending on what
+///value is passed on button click. If 'down vote' vote value is -1 otherwise it
+///becomes 1. This is then passed into the post found by ID and incremented by
+///the stored vote value. Then it redirects to the same page. This uses a patch
+///since it is updating an existing page.
 
 
 router.patch('/post/:id/vote', function (req, res) {
