@@ -1,27 +1,30 @@
-<a class="btn btn-default btn-lr btn-block" href="/posts/new">write</a>
+<div class="post">
+  <a class="btn btn-default btn-lr" href="/posts/new">write</a>
+</div>
 <% posts.forEach(function (post) { %>
   <div class="feed">
-    <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a> Score: <%=post.votes %></h3>
-    <h4> <a href="/users/<%= post.author %>/view"> <%= post.author %> </a> </h4> <h5> <%= post.viewpoint %> </h5>
-    <p>
+    <h4> <a href="/users/<%= post.author %>/view"> <h3><%= post.author %>'s</h3> </a> completely unbased thoughts on</h4>
+    <h3><a href="/posts/<%= post._id %>/view"> <%= post.title %></a></h3>
+    <h5>
       <%= post.content %>
-    </p>
+    </h5>
+    <p>deflation score: <%=post.votes %><p>
     <form class="vote" action="/posts/post/<%= post._id %>/vote?_method=PATCH" method="POST">
-      <input class="btn btn-default btn-xs" type="submit" name="vote" value="up vote">
-      <input class="btn btn-default btn-xs" type="submit" name="vote" value="down vote">
+      <input class="btn btn-primary btn-xs" type="submit" name="vote" value="up vote">
+      <input class="btn btn-danger btn-xs" type="submit" name="vote" value="down vote">
     </form>
 
     <p>
       <% if (post.comments.length == 0) { %>
-        No Comments
+        no one commented or cares
       <% } else if (post.comments.length == 1) { %>
-        1 Comment
+        1 person cares about this, it's probably your cat
       <% } else { %>
-      <%= post.comments.length %> comments %>
+      wow! <%= post.comments.length %> people actually care about what you think! %>
       <% } %>
     </p>
     <p>
-      <%= post.date %>
+      half-baked idea thought up on <%= post.date %>
     </p>
   </div>
 <% }) %>

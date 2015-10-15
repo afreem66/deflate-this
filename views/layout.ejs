@@ -9,21 +9,23 @@
   </head>
   <body>
     <div id="football"><a href="#menu"><img src="http://cliparts.co/cliparts/dc4/84X/dc484XLqi.png" alt="football"/></a></div>
-    <nav id="menu">
+    <nav id="menu" id="xx">
       <ul class="site-header">
         <li><a class="btn btn-default btn-xs btn-block" href="/welcome" role="button">home</a></li>
         <li><a class="btn btn-default btn-xs btn-block" href="/posts/feed" role="button">view feed</a></li>
         <li><a class="btn btn-default btn-xs btn-block" href="/posts/new" role="button">post</a></li>
+        <li><a href="#xx">X</a></li>
       </ul>
     </nav>
     <% if(user) { %>
     <div id="user">
         <a class="btn btn-primary btn-xs" href="#user-menu" role="button"> <%= user.username %></a>
     </div>
-    <div id="user-menu">
+    <div id="user-menu" id="x">
       <ul class="user-menu">
         <li><a class="btn btn-default btn-xs btn block" href="/users/<%= user.username %>/view" role="button">View Profile</a></li>
         <li><a class="btn btn-danger btn-xs btn-block"href="/users/logout" role="button">logout</a></li>
+        <li><a href="#x">X</a></li>
       </ul>
     </div>
     <% } %>
