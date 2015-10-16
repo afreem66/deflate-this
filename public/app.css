@@ -1,22 +1,20 @@
+/*everything*/
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Oxygen', sans-serif;
 }
+
+/*inhertited styles for the entire site body*/
 body {
   background-color: #F8F8F8;
   color: #333;
   background-image: url(http://i.nflcdn.com/static/content/public/static/img/navigation/shields/header-shield.300x250.png);
   background-size: cover;
 }
-a {
-  color: #333;
-}
-a:hover {
-  text-decoration: none;
-  color: lightgray;
-}
+
+/*Styles the nav bar*/
 nav {
   background: #777;
   position: fixed;
@@ -26,6 +24,7 @@ nav {
   opacity: 0.9;
 }
 
+/*this is just for the header on the homepage*/
 h1 {
   text-align: center;
 }
@@ -33,11 +32,7 @@ h1 {
 li {
   display: inline-block;
 }
-
-.start {
-  text-align: center;
-}
-
+/*Any form is styled by this*/
 form > div {
   background: lightgray;
   margin: 0 auto;
@@ -48,6 +43,24 @@ form > div {
   margin-top: 10%;
   text-align: center;
 }
+
+/*styles anchor tags to this color*/
+a {
+  color: #333;
+}
+
+/*style for anchor tages when hovering over them*/
+a:hover {
+  text-decoration: none;
+  color: lightgray;
+}
+
+/*not sure if I need this any more*/
+/*.start {
+  text-align: center;
+}*/
+
+/*the style for the post button on the feed*/
 .post a{
   margin: 2rem;
   position: relative;
@@ -56,17 +69,19 @@ form > div {
   /*right: 50%;*/
   top: 20%;
 }
+
+/*the login div on the login wall page*/
 .login {
   margin-top: 15%;
   text-align: center;
 }
-
 .login > ul {
   padding: 2rem;
   line-height: 2rem;
   font-size: 4rem;
 }
 
+/*this is for styling the menu that slides in from the left*/
 #menu {
   position: fixed;
   height: 8%;
@@ -77,51 +92,67 @@ form > div {
   padding-top: 1rem;
   text-align: left;
 }
+/*this styles the ul in the sliding nav menu*/
 #menu > ul {
   margin-left: 5.5rem;
 }
 
+/*when the football is clicked this css happens*/
 #menu:target {
   left: 0;
   width: 100%;
   z-index: 5;
 }
 
+/*this is the closer for the sliding menu*/
 #xx:target {
   left: -100%;
   transition: 1s all ease;
 }
 
+/*this is the user button that pops up in the right when you have logged in*/
 #user {
   z-index: 6;
   position: fixed;
   right: 1.5%;
   top: 2%;
 }
+
+/*styling for the menu that slides up and down for the user*/
 #user-menu {
   position: fixed;
   top: -100%;
   right: 1.5%;
   transition: 1s all ease;
 }
+
+/*styling the li's in the user menu*/
 #user-menu li {
   display: block;
   margin: 0.5rem;
   text-align: center;
 }
+
+/*what happens when the menu is clicked*/
 #user-menu:target {
   top: 6%;
   right: 1%;
 }
+
+/*to close the menu*/
 #x:target {
   top: -100%;
   right: 1.5%;
   transition: 1s all ease;
 }
+
+/*a potential hack tohave the feed have an nfl logo background*/
 .mainfeed {
   background-image: url(http://i.nflcdn.com/static/content/public/static/img/navigation/shields/header-shield.300x250.png);
   background-size: cover;
 }
+
+/*styling for the feed view*/
 .feed {
   position: relative;
   text-align: center;
@@ -137,14 +168,13 @@ form > div {
   transition: 0.5sec;
 }
 
+/*changes made when someone hovers over a post in the feed*/
 .feed:hover {
   background: #E8E8E8;
   opacity: 0.95;
 }
-.feed > {
-  opacity: 1;
-}
 
+/*the football image*/
 a > img {
   position: fixed;
   top: 0;
@@ -154,6 +184,13 @@ a > img {
   animation: rotation 10s infinite;
   z-index: 6;
 }
+/*the animation for the football*/
+@keyframes rotation {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+
+/*styling the user view page for a user profile*/
 .user-view {
   text-align: center;
   margin-left: 3rem;
@@ -166,10 +203,12 @@ a > img {
   border: #E8E8E8 solid 1px;
   border-radius: 5px;
 }
+/*the posts section in the user profile*/
 .posts {
   text-decoration: underline;
 }
 
+/*styling the individual post view page*/
 .post-view {
   text-align: center;
   margin-left: 3rem;
@@ -181,13 +220,10 @@ a > img {
   margin-right: 0rem;
   margin-top: 5rem;
 }
+/*the comment content in the post view*/
 .comment {
   text-align: center;
 }
 .comments {
   text-decoration: underline;
-}
-@keyframes rotation {
-  0% {transform: rotate(0deg);}
-  100% {transform: rotate(360deg);}
 }
