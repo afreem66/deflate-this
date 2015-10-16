@@ -30,7 +30,7 @@ var express = require('express'),
 ///This route takes the user to the login form page
   router.get('/login', function (req, res) {
     res.render('user/login')
-  });
+  });  
 
 ///This route logs the user in. It searches the User collection for a username
 ///that matches what was entered in the form. If there is a match it checks the
@@ -47,7 +47,7 @@ var express = require('express'),
         bcrypt.compare(req.body.user.password, user.passwordDigest, function (compareErr, match) {
           if (match) {
             req.session.currentUser = user;
-            res.redirect(302, '/posts/feed');
+            res.redirect(302, '/home');
           } else {
             console.log("Username and password combo is not a match");
             res.redirect(302, '/');

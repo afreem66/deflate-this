@@ -56,10 +56,13 @@ server.use('/users', usersController);
 var postsController = require('./controllers/posts.js');
 server.use('/posts', postsController);
 
-server.get('/welcome', function (req, res) {
-  res.render('welcome', {
-    thisUser : req.session.currentUser.username
-  });
+///get pathway to the homepage
+server.get('/home', function (req, res) {
+  if(req.session.currentUser) {
+  res.render('home');
+  } else {
+    res.redirect(302, '/');
+  }
 });
 
 ///catch all pathway brings you back to login or create user page

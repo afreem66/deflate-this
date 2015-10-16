@@ -32,6 +32,13 @@ h1 {
 li {
   display: inline-block;
 }
+/*This styles the test on the homepage*/
+.home {
+  background: #F8F8F8;
+  opacity: 0.9;
+  text-align: center;
+}
+
 /*Any form is styled by this*/
 form > div {
   background: lightgray;
@@ -185,6 +192,9 @@ a > img {
   left: 0;
   height: 5rem;
   width: 5rem;
+  -webkit-animation: rotation 10s infinite;
+  -moz-animation: rotation 10s infinite;
+  -o-animation: rotation 10s infinite;
   animation: rotation 10s infinite;
   z-index: 6;
 }
