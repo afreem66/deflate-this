@@ -1,8 +1,9 @@
 <main class="mainfeed">
 
-<div class="post">
+<div class="postbutton">
   <a class="btn btn-default btn-lr" href="/posts/new">write</a>
 </div>
+
 <% posts.forEach(function (post) { %>
   <div class="feed">
     <h4> <a href="/users/<%= post.author %>/view"> <h3><%= post.author %>'s</h3> </a> completely unbased thoughts on</h4>

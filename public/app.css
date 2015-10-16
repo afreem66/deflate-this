@@ -141,6 +141,7 @@ a:hover {
 #user-menu:target {
   top: 6%;
   right: 1%;
+  z-index: 6;
 }
 
 /*to close the menu*/
@@ -150,10 +151,9 @@ a:hover {
   transition: 1s all ease;
 }
 
-/*a potential hack tohave the feed have an nfl logo background*/
+/*bumps feed down a little out of the menu's way*/
 .mainfeed {
-  background-image: url(http://i.nflcdn.com/static/content/public/static/img/navigation/shields/header-shield.300x250.png);
-  background-size: cover;
+  margin-top: 5rem;
 }
 
 /*styling for the feed view*/
@@ -219,6 +219,7 @@ a > img {
   text-align: center;
   margin-left: 3rem;
   margin-right: 3rem;
+  padding-bottom: 1rem;
 }
 .post-view > h2 {
   text-decoration: underline;
