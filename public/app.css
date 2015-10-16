@@ -42,6 +42,8 @@ form > div {
   border-radius: 1rem;
   margin-top: 10%;
   text-align: center;
+  opacity: 0.95;
+
 }
 
 /*styles anchor tags to this color*/
@@ -70,10 +72,12 @@ a:hover {
   top: 20%;
 }
 
-/*the login div on the login wall page*/
+/*the login div on the loginwall page*/
 .login {
-  margin-top: 15%;
+  margin-top: 13%;
   text-align: center;
+  background: #F8F8F8;
+  opacity: 0.9;
 }
 .login > ul {
   padding: 2rem;
@@ -195,13 +199,13 @@ a > img {
   text-align: center;
   margin-left: 3rem;
   margin-right: 3rem;
+  background: #F8F8F8;
+  opacity: 0.9;
 }
 .user-view > h2 {
   margin-left: 0;
   margin-right: 0rem;
   margin-top: 5rem;
-  border: #E8E8E8 solid 1px;
-  border-radius: 5px;
 }
 /*the posts section in the user profile*/
 .posts {
@@ -210,6 +214,8 @@ a > img {
 
 /*styling the individual post view page*/
 .post-view {
+  background: #F8F8F8;
+  opacity: 0.9;
   text-align: center;
   margin-left: 3rem;
   margin-right: 3rem;
