@@ -161,13 +161,14 @@ a:hover {
 /*bumps feed down a little out of the menu's way*/
 .mainfeed {
   margin-top: 5rem;
+    overflow: scroll;
 }
 
 /*styling for the feed view*/
 .feed {
   position: relative;
   text-align: center;
-  overflow: scroll;
+
   background: #F8F8F8;
   opacity: 0.7;
   margin: 0.1rem auto;
